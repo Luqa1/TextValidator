@@ -1,0 +1,31 @@
+﻿<Window x:Class="TextValidator.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TextValidator"
+        xmlns:vm="clr-namespace:TextValidator.ViewModel"
+        mc:Ignorable="d"
+        Title="Walidator textu" Height="450" Width="800">
+    <Window.DataContext>
+        <vm:MainWindowViewModel/>
+    </Window.DataContext>
+    <Grid>
+        <Label x:Name="lblPattern" Content="Wzorzec" HorizontalAlignment="Left" Margin="10,35,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="txtPattern" Margin="72,35,5,0" Text="{Binding Model.Pattern}" TextWrapping="Wrap" VerticalAlignment="Top" Height="26"/>
+        <Label x:Name="lblCondition" Content="Warunek" HorizontalAlignment="Left" Margin="10,66,0,0" VerticalAlignment="Top"/>
+        <ComboBox HorizontalAlignment="Left" Margin="72,66,0,0" VerticalAlignment="Top" Width="120" RenderTransformOrigin="-1.079,-1.546" Height="26" ItemsSource="{Binding Path=SupportedConditions}" SelectedValue="{Binding Path=Model.Condition}"/>
+        <Button Command="{Binding Path=ValidateCommand}" x:Name="btnValidate" Content="Waliduj" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="-2.057,0.578" Width="55"/>
+        <Label x:Name="lblTxt" Content="Tekst:" HorizontalAlignment="Left" Margin="10,97,0,0" VerticalAlignment="Top" Width="57"/>
+        <RichTextBox x:Name="rtxtText" Margin="10,128,10,10">
+            <FlowDocument>
+                <Paragraph>
+                    <Run Text="{Binding Model.Text}"/>
+                </Paragraph>
+            </FlowDocument>
+        </RichTextBox>
+        <CheckBox x:Name="chbMatchCase" Content="Uwzgędniaj wilekość liter" HorizontalAlignment="Left" Margin="225,71,0,0" VerticalAlignment="Top" IsChecked="{Binding Path=Model.ShouldMatchCase, Mode=TwoWay}"/>
+        <Label x:Name="lblResultLabel" Content="Wynik walidacji:" HorizontalAlignment="Left" Margin="72,4,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lblResult" Content="{Binding Model.ValidationResult}" HorizontalAlignment="Left" Margin="171,4,0,0" VerticalAlignment="Top" Width="181"/>
+    </Grid>
+</Window>
